@@ -1,0 +1,104 @@
+<section id="page" class="pageBackground">
+  <aside id="pageAside"  #pageAside [ngClass]="{'closeAside': toggleleftMenu}" class="pageAside" *ngIf="(sectionName !== 'dashboard')">
+    <!-- left Menu navParent -->
+    <nav class="navParent">
+      <ul>
+        <li *ngIf="role !== constants.sponsorId">
+          <a (click)="onToggleSubMenu('userManagement');">
+            <img title="User Management" [src]="(sectionName !== 'userManagement') ? './assets/img/icons/user_2.svg' : './assets/img/icons/user-on.svg'"
+              alt="User Management">
+          </a>
+        </li>
+            </ul>
+    </nav>
+
+    <!-- left Menu navChild -->
+    <nav class="navChild" [ngClass]="{'openLefMenu': toggleleftMenu}">
+      <div id="leftNavMenu" class="leftNavMenu">
+        <img class="logo" src="./assets/img/App_Icon.png" alt="">
+        <ul class="list-group menu">
+
+          <!-- User Management menu -->
+          <ng-container *ngIf=" (role=== constants.adminId || role === constants.superAdminId || role === constants.croId
+          ||  role === constants.piId ||  role === constants.sitesId)  && sectionName === 'userManagement'">
+
+            <ul class="submenu">
+              <li class="list-group-item" routerLinkActive="activerout">
+                <a [routerLink]="navigateToSubjects('users')">
+
+                  Users
+                </a>
+              </li>
+
+              <li class="list-group-item" routerLinkActive="activerout">
+                <a [routerLink]="navigateToSubjects('product')">
+
+                  Product
+                </a>
+              </li>
+
+
+            </ul>
+            <!-- User Management menu end -->
+          </ng-container>
+        </ul>
+      </div>
+    </nav>
+    <!--==== left Menu end======-->
+  </aside>
+
+  <!-- =========================================================================================================== -->
+
+  <article id = "pageContainer" [ngClass]="{'pushPageContainer': toggleleftMenu}" class="pageContainer" >
+    <!-- header -->
+    <header>
+      <mat-toolbar>
+        <mat-toolbar-row class="headerBottomBorder">
+          <div *ngIf = "sectionName !== 'dashboard'">
+            <img class="toggleMenuBtn" (click)="onToggleLeftMenu();" src="./assets/img/icons/menu.svg" alt="">
+
+            <div id="trial" class="trialName">{{trialName}}</div>
+            <div id="breadcrum" class="bredcrum"> {{ breadCrum}}</div>
+          </div>
+          <div class="date bredcrum dateStyleBread" *ngIf = "sectionName === 'dashboard'">
+            {{today | date:'EEEE, dd MMMM yyyy'}}
+          </div>
+          <span class="tm_spacer"></span>
+          <div class="headerRightContent">
+            <div class="col">
+              <div ngbDropdown class="d-inline-block row">
+                <a href="javascript:void(0);" class="" id="userdropdown" ngbDropdownToggle>
+
+                  <span class="user-welcome" mat-button> Welcome, {{user}}</span>
+
+
+                    <img class="userProfileImg" src="./assets/img/icons/user.svg" alt="">
+
+                </a>
+                <span class="user-notification">
+                  <!-- <a routerLink="/contentManagement/notifications"> -->
+                  <img class="notification" src="./assets/img/icons/notification.svg" alt="">
+
+                </span>
+                <div class="userDropwdown" ngbDropdownMenu aria-labelledby="userdropdown">
+                  <!-- <a href="javascript:void(0);" class="dropdown-item" (click)="onToggleSubMenu('settings');">Settings</a> -->
+                  <a href="javascript:void(0);" class="dropdown-item" (click)="onLogout();"> Logout </a>
+                </div>
+              </div>
+              <!-- <span class="roleStyle row ">{{userRole}} </span> -->
+            </div>
+          </div>
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </header>
+    <!-- header end-->
+
+    <!-- ==================================================================================================== -->
+
+    <!-- page content start -->
+    <div class="mainContainer">
+      <router-outlet></router-outlet>
+    </div>
+    <!-- page content end -->
+  </article>
+</section>

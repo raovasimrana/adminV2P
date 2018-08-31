@@ -1,0 +1,45 @@
+<div class="centerDiv">
+  <div class="wrapper">
+    <div class="loginLogo">
+      <img class="loginImage" src="./assets/img/App_Icon.png">
+    </div>
+    <form [formGroup]="loginForm" novalidate class="form-signin">
+      <div class="loginTop">
+        <!-- <span class="welcome">Welcome back!</span> -->
+        <p>
+          Login to continue
+        </p>
+      </div>
+      <div class="loginForm ">
+        <div class="form-group" [ngClass]="{'isInvalid' :((loginForm['controls'].emailId.errors?.required && loginForm['controls'].emailId.touched)  ||(loginForm['controls'].emailId.hasError('pattern') && loginForm['controls'].emailId.touched)|| (loginForm['controls'].emailId.errors?.required&& submitted))}">
+          <label for="emailId">Email ID</label>
+          <input type="email" class="form-control" name="emailId" formControlName="emailId" [pattern]="pattern" (keyup.enter)="login();"
+            placeholder=" Email ID">
+          <span class="row input-padding error-message" *ngIf="((loginForm['controls'].emailId.errors?.required && loginForm['controls'].emailId.touched)  ||(loginForm['controls'].emailId.hasError('pattern') && loginForm['controls'].emailId.touched)|| (loginForm['controls'].emailId.errors?.required&& submitted))">
+            *Please enter valid Email ID
+          </span>
+        </div>
+        <div class="form-group" [ngClass]="{'isInvalid' :(loginForm['controls'].password.errors?.required && loginForm['controls'].password.touched) || (loginForm['controls'].password.errors?.required && submitted) || (loginForm['controls'].password.hasError('pattern') && loginForm['controls'].password.touched)}">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="password" formControlName="password" [pattern]="passwordPattern" (keyup.enter)="login();"
+            placeholder="Password">
+          <span class="row input-padding error-message" *ngIf="(loginForm['controls'].password.errors?.required && loginForm['controls'].password.touched) || (loginForm['controls'].password.errors?.required && submitted)">
+            *Please enter valid Password
+          </span>
+          <span class="row input-padding error-message" *ngIf="(loginForm['controls'].password.hasError('pattern') && loginForm['controls'].password.touched)">
+            *Please enter password of minimum 8 and maximum 16 characters
+          </span>
+        </div>
+        <div class="form-group ">
+          <button type="submit" class="btn btn-default loginBtn" (click)="login();">
+            Login
+            <i *ngIf="spiner" class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+          </button>
+        </div>
+        <!-- <div class="form-group errorMessage">
+          {{errMessage}}
+        </div> -->
+      </div>
+    </form>
+  </div>
+</div>
