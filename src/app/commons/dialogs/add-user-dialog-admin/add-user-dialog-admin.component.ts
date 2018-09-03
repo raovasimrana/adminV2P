@@ -35,9 +35,10 @@ export class AddUserDialogAdminComponent implements OnInit {
     this.form = this.fb.group({
       users: this.fb.group({
         name: ['', Validators.required],
-        emailId: ['', Validators.required],
+        email: ['', Validators.required],
         phone: ['', Validators.required],
-        type:['', Validators.required],
+        userType:['', Validators.required],
+        experience:['',Validators.required],
       }),
       product: this.fb.group({
         productName: ['', Validators.required],
@@ -57,9 +58,12 @@ export class AddUserDialogAdminComponent implements OnInit {
       switch(this.data.url){
         case 'users' :{
           this.form['controls'].users['controls'].name.setValue(this.data.data.name);
-            this.form['controls'].users['controls'].emailId.setValue(this.data.email);
+            this.form['controls'].users['controls'].email.setValue(this.data.email);
               this.form['controls'].users['controls'].phone.setValue(this.data.phone);
-                this.form['controls'].users['controls'].type.setValue(this.data.userType);
+                this.form['controls'].users['controls'].userType.setValue(this.data.userType);
+                this.form['controls'].users['controls'].experience.setValue(this.data.experience);
+              
+                
         }
         case 'product' :{
           this.form['controls'].product['controls'].productName.setValue(this.data.data.productName);
@@ -84,9 +88,13 @@ public onFileChange(event){
     if(this.form['controls'].users.valid && (this.data.data || this.imageData.length)){
       console.log(this.form['controls'].users , this.imageData)
       this.formData.append('name',this.form['controls'].users['controls'].name.value);
-      this.formData.append('emailId',this.form['controls'].users['controls'].emailId.value);
+      this.formData.append('email',this.form['controls'].users['controls'].email.value);
       this.formData.append('phone',this.form['controls'].users['controls'].phone.value);
-      this.formData.append('type',this.form['controls'].users['controls'].type.value);
+      this.formData.append('userType',this.form['controls'].users['controls'].userType.value);
+      
+      this.formData.append('experience',this.form['controls'].users['controls'].experience.value);
+      console.log("value", this.form['controls'].users['controls'].experience.value);
+      
       this.formData.append('image', this.imageData[0]);
       this.dialogRef.close(this.formData);
    } else {

@@ -28,6 +28,7 @@
                 <th scope="col">address</th>
                 <th scope="col">Email</th>
                 <th scope="col">Type</th>
+                <th scope="col">Experience</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -38,6 +39,7 @@
                 <td class="table-content">{{user.address}} </td>
                 <td class="table-content">{{user.email}} </td>
                 <td class="table-content"> {{user.userType}} </td>
+                <td class="table-content"> {{user.experience}} </td>
                 <td class="table-content">
                   <img class="filterIcon icons" src="./assets/img/icons/delete.svg" alt="filter" (click)="deleteUser(user._id)">
                   <img class="filterIcon icons" src="./assets/img/icons/edit.svg" alt="filter" (click)="editUser(user)">
