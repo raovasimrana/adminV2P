@@ -19,7 +19,7 @@ export class AdminService {
     constructor(private _http: HttpService, private router: Router, private http:Http) {
     }
     getProdctList() {
-            return this._http.get(`${AppConfig.baseUrl}/products`).map(response => response.json());
+            return this._http.get(`${AppConfig.baseUrl}/api/products`).map(response => response.json());
     }
     getUsersList() {
       return this._http.get(`${AppConfig.baseUrl}/api/users`).map(response => response.json());
@@ -29,7 +29,7 @@ export class AdminService {
       const headers = new Headers();
       headers.append('mimeType', 'multipart/form-data');
       const options = new RequestOptions({ headers: headers });
-        return this.http.put(`${AppConfig.baseUrl}/api/${phone}/users`, userInputObj).map(response => response.json());
+      return this.http.put(`${AppConfig.baseUrl}/api/${phone}/users`, userInputObj).map(response => response.json());
     }
     saveUsers(objData) {
       const headers = new Headers();
@@ -38,7 +38,6 @@ export class AdminService {
         return this.http.post(`${AppConfig.baseUrl}/api/users/register`, objData, options).map(response => response.json());
     }
     deleteUser(userId) {
-        this.trialId = localStorage.getItem('trialId');
-        return this._http.delete(`${AppConfig.baseUrl}/${userId}/users?trialId=${this.trialId}`).map(response => response.json());
+        return this._http.delete(`${AppConfig.baseUrl}/api/${userId}/users`).map(response => response.json());
     }
 }

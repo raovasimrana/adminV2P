@@ -15,10 +15,11 @@ export class AccountService {
   constructor(private _http: HttpService, private router: Router, public http: Http) {
     this.isUserLoggedIn = false;
   }
-
-  getRoleList() {
-    return this._http.get(`${AppConfig.baseUrl}/getRoleList`).map(response => response.json());
-  }
+    checkRole(): any {
+      if (LocalStorage.hasOwnProperty('role')) {
+        return LocalStorage.get('role');
+      }
+    }
 
   setUserLoggedIn(): void {
     if (LocalStorage.hasOwnProperty('access_token')) {
@@ -31,23 +32,14 @@ export class AccountService {
       return this.isUserLoggedIn = Boolean(LocalStorage.get('isUserLoggedIn'));
     }
   }
-  checkRole(): any {
-    if (LocalStorage.hasOwnProperty('role')) {
-      return LocalStorage.get('role');
-    }
-  }
+
   login(userInputObj) {
     return this._http.post(`${AppConfig.baseUrl}/api/login`, userInputObj).map(response => response.json());
   }
   signup(userInputObj) {
     return this._http.post(`${AppConfig.baseUrl}/signup`, userInputObj);
   }
-  forgotPassword(userInputObj) {
-    return this._http.post(`${AppConfig.baseUrl}/users/forgotPassword`, userInputObj).map(response => response.json());
-  }
-  setPassword(userInputObj) {
-    return this._http.put(`${AppConfig.baseUrl}/users/setPassword`, userInputObj).map(response => response.json());
-  }
+
 
   logout() {
     this.isUserLoggedIn = false;

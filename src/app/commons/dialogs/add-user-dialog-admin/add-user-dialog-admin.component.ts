@@ -23,16 +23,7 @@ export class AddUserDialogAdminComponent implements OnInit {
   public croUsers: any = [];
   public piUsers: any = [];
   public sponsorName = []
-  public roles = [
-    {
-      '_id': this.constants.sitesId,
-      'name': 'Site Coordinator'
-    },
-    {
-      '_id': this.constants.piId,
-      'name': 'PI'
-    }
-  ]
+
   public imageData: any = [];
  public formData = new FormData();
   constructor(public dialogRef: MatDialogRef<AddUserDialogAdminComponent>,
@@ -40,15 +31,16 @@ export class AddUserDialogAdminComponent implements OnInit {
     public fb: FormBuilder,
     public userManagementService: UserManagementService,
     public toasterService: ToasterService) {
+
     this.form = this.fb.group({
       users: this.fb.group({
         name: ['', Validators.required],
         emailId: ['', Validators.required],
-        contact: ['', Validators.required],
+        phone: ['', Validators.required],
         type:['', Validators.required],
       }),
       product: this.fb.group({
-        name: ['', Validators.required],
+        productName: ['', Validators.required],
         description: ['', Validators.required],
         price: ['', Validators.required],
         content:['', Validators.required],
@@ -65,15 +57,15 @@ export class AddUserDialogAdminComponent implements OnInit {
       switch(this.data.url){
         case 'users' :{
           this.form['controls'].users['controls'].name.setValue(this.data.data.name);
-            this.form['controls'].users['controls'].emailId.setValue(this.data.data.email);
-              this.form['controls'].users['controls'].contact.setValue(this.data.data.phone);
-                this.form['controls'].users['controls'].type.setValue(this.data.data.userType);
+            this.form['controls'].users['controls'].emailId.setValue(this.data.email);
+              this.form['controls'].users['controls'].phone.setValue(this.data.phone);
+                this.form['controls'].users['controls'].type.setValue(this.data.userType);
         }
         case 'product' :{
-          this.form['controls'].product['controls'].name.setValue(this.data.data.name);
-            this.form['controls'].product['controls'].emailId.setValue(this.data.data.email);
-              this.form['controls'].product['controls'].contact.setValue(this.data.data.phone);
-                this.form['controls'].product['controls'].type.setValue(this.data.data.userType);
+          this.form['controls'].product['controls'].productName.setValue(this.data.data.productName);
+            this.form['controls'].product['controls'].description.setValue(this.data.data.description);
+              this.form['controls'].product['controls'].price.setValue(this.data.data.price);
+                this.form['controls'].product['controls'].content.setValue(this.data.data.content);
         }
       }
     }
@@ -93,7 +85,7 @@ public onFileChange(event){
       console.log(this.form['controls'].users , this.imageData)
       this.formData.append('name',this.form['controls'].users['controls'].name.value);
       this.formData.append('emailId',this.form['controls'].users['controls'].emailId.value);
-      this.formData.append('contact',this.form['controls'].users['controls'].contact.value);
+      this.formData.append('phone',this.form['controls'].users['controls'].phone.value);
       this.formData.append('type',this.form['controls'].users['controls'].type.value);
       this.formData.append('image', this.imageData[0]);
       this.dialogRef.close(this.formData);

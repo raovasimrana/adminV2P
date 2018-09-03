@@ -24,19 +24,23 @@
             <thead class="cust-theme-heading  table-content">
               <tr>
                 <th scope="col">Name</th>
-                <th scope="col"> Email </th>
-                <th scope="col">Type </th>
-                <th scope="col">Action </th>
+                <th scope="col">Phone</th>
+                <th scope="col">address</th>
+                <th scope="col">Email</th>
+                <th scope="col">Type</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody class='cust-theme-body'>
               <tr *ngFor="let user of userList">
                 <td class="table-content">{{user.name}} </td>
+                <td class="table-content">{{user.phone}} </td>
+                <td class="table-content">{{user.address}} </td>
                 <td class="table-content">{{user.email}} </td>
                 <td class="table-content"> {{user.userType}} </td>
                 <td class="table-content">
                   <img class="filterIcon icons" src="./assets/img/icons/delete.svg" alt="filter" (click)="deleteUser(user._id)">
-                    <img class="filterIcon icons" src="./assets/img/icons/edit.svg" alt="filter" (click)="editUser(user)">
+                  <img class="filterIcon icons" src="./assets/img/icons/edit.svg" alt="filter" (click)="editUser(user)">
                 </td>
               </tr>
             </tbody>
@@ -44,23 +48,23 @@
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="col-12"*ngIf="url ==='prodcuts'">
+    <div class="col-12" *ngIf="url ==='product'">
       <mat-card class="mb-4" >
         <mat-card-content>
           <table class="table table-hover">
             <thead class="cust-theme-heading  table-content">
               <tr>
-                <th scope="col">Name</th>
-                <th scope="col"> Email </th>
-                <th scope="col">Type </th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Price </th>
+                <th scope="col">Description </th>
                 <th scope="col">Action </th>
               </tr>
             </thead>
             <tbody class='cust-theme-body'>
               <tr *ngFor="let product of productList">
-                <td class="table-content">{{product.nickName}} </td>
-                <td class="table-content">{{product.emailId}} </td>
-                <td class="table-content"> Type </td>
+                <td class="table-content">{{product.productName}} </td>
+                <td class="table-content">{{product.price}} </td>
+                <td class="table-content">{{product.description}} </td>
                 <td class="table-content">
                   <img class="filterIcon icons" src="./assets/img/icons/delete.svg" alt="filter" (click)="deleteUser(product._id)">
                     <img class="filterIcon icons" src="./assets/img/icons/edit.svg" alt="filter" (click)="editUser(product)">
