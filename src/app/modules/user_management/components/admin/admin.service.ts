@@ -29,7 +29,7 @@ export class AdminService {
       const headers = new Headers();
       headers.append('mimeType', 'multipart/form-data');
       const options = new RequestOptions({ headers: headers });
-      return this.http.put(`${AppConfig.baseUrl}/api/${phone}/users`, userInputObj).map(response => response.json());
+      return this.http.put(`${AppConfig.baseUrl}/api/${phone}/users?email=${userInputObj.email}&phone=${userInputObj.phone}`, userInputObj).map(response => response.json());
     }
     saveUsers(objData) {
       const headers = new Headers();

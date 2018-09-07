@@ -92,7 +92,7 @@ public onFileChange(event){
       this.formData.append('phone',this.form['controls'].users['controls'].phone.value);
       this.formData.append('userType',this.form['controls'].users['controls'].userType.value);
       
-      this.formData.append('experience',this.form['controls'].users['controls'].experience.value);
+      this.formData.append('experience',JSON.stringify([this.form['controls'].users['controls'].experience.value]));
       console.log("value", this.form['controls'].users['controls'].experience.value);
       
       this.formData.append('image', this.imageData[0]);
