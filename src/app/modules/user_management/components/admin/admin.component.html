@@ -5,7 +5,8 @@
         <div class="text-right">
           <div class="search">
             <div class="form-group">
-              <input type="text" class="form-control search-field" placeholder="Search" (keyup)="searchData()" [(ngModel)]="searchFilter"/>
+              <input type="text" class="form-control search-field" placeholder="Search" (keyup)="searchData()"
+                [(ngModel)]="searchFilter" />
               <span class="align-icon">
                 <img class="" src="./assets/img/icons/search.svg" alt="search">
               </span>
@@ -18,7 +19,7 @@
       </div>
     </div>
     <div class="col-12" *ngIf="url ==='users'">
-      <mat-card class="mb-4" >
+      <mat-card class="mb-4">
         <mat-card-content>
           <table class="table table-hover">
             <thead class="cust-theme-heading  table-content">
@@ -28,7 +29,7 @@
                 <th scope="col">address</th>
                 <th scope="col">Email</th>
                 <th scope="col">Type</th>
-                <th scope="col">Experience</th>
+                <!-- <th scope="col">Experience</th> -->
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -39,10 +40,11 @@
                 <td class="table-content">{{user.address}} </td>
                 <td class="table-content">{{user.email}} </td>
                 <td class="table-content"> {{user.userType}} </td>
-                <td class="table-content"> {{user.experience}} </td>
+                <!-- <td class="table-content"> {{user.experience}} </td> -->
                 <td class="table-content">
-                  <img class="filterIcon icons" src="./assets/img/icons/delete.svg" alt="filter" (click)="deleteUser(user._id)">
-                  <img class="filterIcon icons" src="./assets/img/icons/edit.svg" alt="filter" (click)="editUser(user)">
+                  <Button class="btn-primary checkButtons btnAprove icons" (click)="changeUserStatus('approve')">Approve</Button>
+                  <img class="filterIcon " src="./assets/img/icons/edit.svg" alt="filter" (click)="editUser(user)">
+                  <img class="filterIcon " src="./assets/img/icons/delete.svg" alt="filter" (click)="deleteUser(user._id)">
                 </td>
               </tr>
             </tbody>
@@ -51,7 +53,7 @@
       </mat-card>
     </div>
     <div class="col-12" *ngIf="url ==='product'">
-      <mat-card class="mb-4" >
+      <mat-card class="mb-4">
         <mat-card-content>
           <table class="table table-hover">
             <thead class="cust-theme-heading  table-content">
@@ -68,8 +70,8 @@
                 <td class="table-content">{{product.price}} </td>
                 <td class="table-content">{{product.description}} </td>
                 <td class="table-content">
-                  <img class="filterIcon icons" src="./assets/img/icons/delete.svg" alt="filter" (click)="deleteUser(product._id)">
-                    <img class="filterIcon icons" src="./assets/img/icons/edit.svg" alt="filter" (click)="editUser(product)">
+                  <img class="filterIcon icons" src="./assets/img/icons/delete.svg" alt="filter" (click)="deleteUserOrProduct(product._id)">
+                  <img class="filterIcon icons" src="./assets/img/icons/edit.svg" alt="filter" (click)="editProduct(product)">
                 </td>
               </tr>
             </tbody>
