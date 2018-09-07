@@ -45,5 +45,10 @@ export class AdminService {
     }
     deleteUser(userId) {
         return this._http.delete(`${AppConfig.baseUrl}/api/${userId}/users`).map(response => response.json());
+  
+    }
+
+    approveUser(phone, userInputObj) {
+      return this.http.put(`${AppConfig.baseUrl}/api/${phone}/users?isValidated=true`, userInputObj).map(response => response.json());
     }
 }

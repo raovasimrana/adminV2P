@@ -216,10 +216,10 @@ export class AdminComponent implements OnInit {
       }
     });
   }
-  changeUserStatus(type) {
-    this.adminService.deleteUser(type).subscribe((success) => {
+  changeUserStatus(data) {
+    this.adminService.approveUser(data.phone, data).subscribe((success) => {
       this.loaderService.display(false);
-      this.toasterService.pop('success', 'User Deleted Successfully')
+      this.toasterService.pop('success', 'User Approved Successfully')
       console.log(success);
       this.getUserList(this.url);
     },

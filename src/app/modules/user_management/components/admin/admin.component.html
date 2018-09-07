@@ -29,6 +29,7 @@
                 <th scope="col">address</th>
                 <th scope="col">Email</th>
                 <th scope="col">Type</th>
+                <th scope="col">Status</th>
                 <!-- <th scope="col">Experience</th> -->
                 <th scope="col">Action</th>
               </tr>
@@ -42,9 +43,11 @@
                 <td class="table-content"> {{user.userType}} </td>
                 <!-- <td class="table-content"> {{user.experience}} </td> -->
                 <td class="table-content">
-                  <Button class="btn-primary checkButtons btnAprove icons" (click)="changeUserStatus('approve')">Approve</Button>
+                  <span *ngIf="user.isValidated">Approved</span>
+                  <Button *ngIf="!user.isValidated" class="btn-primary checkButtons btnAprove icons" (click)="changeUserStatus(user)">Approve</Button></td>
+                <td class="table-content">
                   <img class="filterIcon " src="./assets/img/icons/edit.svg" alt="filter" (click)="editUser(user)">
-                  <img class="filterIcon " src="./assets/img/icons/delete.svg" alt="filter" (click)="deleteUser(user._id)">
+                  <img class="filterIcon " src="./assets/img/icons/delete.svg" alt="filter" (click)="deleteUserOrProduct(user._id)">
                 </td>
               </tr>
             </tbody>
