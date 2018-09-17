@@ -12,6 +12,8 @@ import { ToasterService } from 'angular2-toaster';
 import { LocalStorage } from '../../../../commons/services/localStorage.service';
 import * as _ from 'lodash';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ViewDocumentComponent } from '../../../../commons/dialogs/view-document/view-document.component';
+
 @Component({
   selector: 'tm-admin',
   templateUrl: './admin.component.html',
@@ -164,6 +166,15 @@ export class AdminComponent implements OnInit {
 
   }
 
+  viewDocument(){
+    const dialogRef = this.dialog.open(ViewDocumentComponent, {
+      width: '700px',
+      data: { url: this.url }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      
+    });
+  }
   editUser(data) {
     console.log("data", data);
     const userData = {

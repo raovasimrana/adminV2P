@@ -21,12 +21,14 @@ import { AddUserDialogAdminComponent } from './commons/dialogs/add-user-dialog-a
 import {ToasterModule, ToasterService, ToasterConfig} from 'angular2-toaster';
 import { LoaderService } from './commons/services/loader.service';
 import { ConfirmDialogComponent } from './commons/dialogs/confirm-dialog/confirm-dialog.component';
+import { ViewDocumentComponent } from './commons/dialogs/view-document/view-document.component';
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
     AddUserDialogAdminComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ViewDocumentComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,7 @@ import { ConfirmDialogComponent } from './commons/dialogs/confirm-dialog/confirm
     ToasterModule.forRoot(),
   ],
   providers: [{ provide: LocalStorage, useValue: 'test' }, AuthGuard, AdminGuard, ToasterService, LoaderService, CustomValidationService],
-  entryComponents: [AddUserDialogAdminComponent, ConfirmDialogComponent],
+  entryComponents: [AddUserDialogAdminComponent, ConfirmDialogComponent, ViewDocumentComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

@@ -5,8 +5,8 @@
         <div class="text-right">
           <div class="search">
             <div class="form-group">
-              <input type="text" class="form-control search-field" placeholder="Search" (keyup)="searchData()"
-                [(ngModel)]="searchFilter" />
+              <input type="text" class="form-control search-field" placeholder="Search" (keyup)="searchData()" [(ngModel)]="searchFilter"
+              />
               <span class="align-icon">
                 <img class="" src="./assets/img/icons/search.svg" alt="search">
               </span>
@@ -32,6 +32,7 @@
                 <th scope="col">Email</th>
                 <th scope="col">Type</th>
                 <th scope="col">Status</th>
+                <th scope="col">Document</th>
                 <!-- <th scope="col">Experience</th> -->
                 <th scope="col">Action</th>
               </tr>
@@ -46,7 +47,11 @@
                 <!-- <td class="table-content"> {{user.experience}} </td> -->
                 <td class="table-content">
                   <span *ngIf="user.isValidated">Approved</span>
-                  <Button *ngIf="!user.isValidated" class="btn-primary checkButtons btnAprove icons" (click)="changeUserStatus(user)">Approve</Button></td>
+                  <Button *ngIf="!user.isValidated" class="btn-primary checkButtons btnAprove icons" (click)="changeUserStatus(user)">Approve</Button>
+                </td>
+                <td class="table-content">
+                  <img (click)="viewDocument();" class="pdf" src="./assets/img/icons/file.svg" alt="file">
+                </td>
                 <td class="table-content">
                   <img class="filterIcon " src="./assets/img/icons/edit.svg" alt="filter" (click)="editUser(user)">
                   <img class="filterIcon " src="./assets/img/icons/delete.svg" alt="filter" (click)="deleteUserOrProduct(user._id)">
@@ -87,7 +92,7 @@
     </div>
     <!-- Order List -->
     <div class="col-12" *ngIf="url ==='order'">
-      <mat-card class="mb-4" >
+      <mat-card class="mb-4">
         <mat-card-content>
           <table class="table table-hover">
             <thead class="cust-theme-heading  table-content">
@@ -107,13 +112,13 @@
                 <td class="table-content">{{order.totalPrice}} </td>
                 <td class="table-content">{{order.quantity}} </td>
                 <td class="table-content">{{order.paymentMethod}} </td>
-                <td class="table-content" >
-                    <div>
-                        <span *ngIf="order.status === 'success'" class="checkButtons success-text " > Success </span>
-                        <span *ngIf="order.status !== 'success'" class="checkButtons failed-text " > Failed </span>
-                      </div>
-                  </td>
-                                <!-- <td class="table-content">
+                <td class="table-content">
+                  <div>
+                    <span *ngIf="order.status === 'success'" class="checkButtons success-text "> Success </span>
+                    <span *ngIf="order.status !== 'success'" class="checkButtons failed-text "> Failed </span>
+                  </div>
+                </td>
+                <!-- <td class="table-content">
                   <img class="filterIcon icons" src="./assets/img/icons/delete.svg" alt="filter" (click)="deleteUser(product._id)">
                     <img class="filterIcon icons" src="./assets/img/icons/edit.svg" alt="filter" (click)="editUser(product)">
                 </td> -->
@@ -125,7 +130,7 @@
     </div>
     <!-- Appointment List -->
     <div class="col-12" *ngIf="url ==='appointment'">
-      <mat-card class="mb-4" >
+      <mat-card class="mb-4">
         <mat-card-content>
           <table class="table table-hover">
             <thead class="cust-theme-heading  table-content">
@@ -147,7 +152,7 @@
                 <td class="table-content">{{appointment.providerPhone}} </td>
                 <td class="table-content">{{appointment.status}} </td>
 
-                
+
 
                 <!-- <td class="table-content">
                   <img class="filterIcon icons" src="./assets/img/icons/delete.svg" alt="filter" (click)="deleteUserOrProduct(product._id)">
