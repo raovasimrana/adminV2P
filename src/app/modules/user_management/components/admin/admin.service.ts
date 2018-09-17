@@ -43,12 +43,6 @@ export class AdminService {
       const options = new RequestOptions({ headers: headers });
       return this.http.put(`${AppConfig.baseUrl}/api/${phone}/product`, userInputObj).map(response => response.json());
     }
-    editProduct(phone, userInputObj) {
-      const headers = new Headers();
-      headers.append('mimeType', 'multipart/form-data');
-      const options = new RequestOptions({ headers: headers });
-      return this.http.put(`${AppConfig.baseUrl}/api/${phone}/product`, userInputObj).map(response => response.json());
-    }
     saveUsers(objData) {
       const headers = new Headers();
       headers.append('mimeType', 'multipart/form-data');
