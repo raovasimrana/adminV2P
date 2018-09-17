@@ -1065,3 +1065,15 @@ padding-right: 27px;
 .ckEditorWidth{
   width:100%;
 }
+.success-text{
+  color: #ffffff !important;
+  background-color:green;
+  border: solid 1px green;
+  padding: 7px;
+}
+.failed-text{
+  color: #ffffff !important;
+  background-color: red;
+  border: solid 1px red;
+  padding: 7px;
+}

@@ -109,7 +109,7 @@ export class AdminComponent implements OnInit {
         this.adminService.getOrderList().subscribe((data) => {
           console.log('success', data);
           this.loaderService.display(false);
-          this.userList = data;
+          this.userList = data.data;
           this.filteredData = Object.assign([],this.userList);
 
         },

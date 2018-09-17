@@ -71,7 +71,7 @@
               </tr>
             </thead>
             <tbody class='cust-theme-body'>
-              <tr *ngFor="let product of productList">
+              <tr *ngFor="let product of userList">
                 <td class="table-content">{{product.productName}} </td>
                 <td class="table-content">{{product.price}} </td>
                 <td class="table-content">{{product.description}} </td>
@@ -92,21 +92,31 @@
           <table class="table table-hover">
             <thead class="cust-theme-heading  table-content">
               <tr>
-                <th scope="col">Product Name</th>
-                <th scope="col">Price </th>
-                <th scope="col">Description </th>
-                <th scope="col">Action </th>
+                <th scope="col">User Name</th>
+                <th scope="col">Phone </th>
+                <th scope="col">Total Price </th>
+                <th scope="col">Quantity </th>
+                <th scope="col">Payment Method </th>
+                <th scope="col">Status </th>
               </tr>
             </thead>
             <tbody class='cust-theme-body'>
-              <tr *ngFor="let product of productList">
-                <td class="table-content">{{product.productName}} </td>
-                <td class="table-content">{{product.price}} </td>
-                <td class="table-content">{{product.description}} </td>
-                <td class="table-content">
+              <tr *ngFor="let order of userList">
+                <td class="table-content">{{order.userName}} </td>
+                <td class="table-content">{{order.userPhone}} </td>
+                <td class="table-content">{{order.totalPrice}} </td>
+                <td class="table-content">{{order.quantity}} </td>
+                <td class="table-content">{{order.paymentMethod}} </td>
+                <td class="table-content" >
+                    <div>
+                        <span *ngIf="order.status === 'success'" class="checkButtons success-text " > Success </span>
+                        <span *ngIf="order.status !== 'success'" class="checkButtons failed-text " > Failed </span>
+                      </div>
+                  </td>
+                                <!-- <td class="table-content">
                   <img class="filterIcon icons" src="./assets/img/icons/delete.svg" alt="filter" (click)="deleteUser(product._id)">
                     <img class="filterIcon icons" src="./assets/img/icons/edit.svg" alt="filter" (click)="editUser(product)">
-                </td>
+                </td> -->
               </tr>
             </tbody>
           </table>
@@ -120,21 +130,29 @@
           <table class="table table-hover">
             <thead class="cust-theme-heading  table-content">
               <tr>
-                <th scope="col">Product Name</th>
-                <th scope="col">Price </th>
-                <th scope="col">Description </th>
-                <th scope="col">Action </th>
+                <th scope="col">User Name</th>
+                <th scope="col">User Phone </th>
+                <th scope="col">Availed Service </th>
+                <th scope="col">Provider Name </th>
+                <th scope="col">Provider Phone </th>
+                <th scope="col">Status </th>
               </tr>
             </thead>
             <tbody class='cust-theme-body'>
-              <tr *ngFor="let product of productList">
-                <td class="table-content">{{product.productName}} </td>
-                <td class="table-content">{{product.price}} </td>
-                <td class="table-content">{{product.description}} </td>
-                <td class="table-content">
-                  <img class="filterIcon icons" src="./assets/img/icons/delete.svg" alt="filter" (click)="deleteUser(product._id)">
-                    <img class="filterIcon icons" src="./assets/img/icons/edit.svg" alt="filter" (click)="editUser(product)">
-                </td>
+              <tr *ngFor="let appointment of userList">
+                <td class="table-content">{{appointment.userName}} </td>
+                <td class="table-content">{{appointment.userPhone}} </td>
+                <td class="table-content">{{appointment.availedService}} </td>
+                <td class="table-content">{{appointment.providerName}} </td>
+                <td class="table-content">{{appointment.providerPhone}} </td>
+                <td class="table-content">{{appointment.status}} </td>
+
+                
+
+                <!-- <td class="table-content">
+                  <img class="filterIcon icons" src="./assets/img/icons/delete.svg" alt="filter" (click)="deleteUserOrProduct(product._id)">
+                  <img class="filterIcon icons" src="./assets/img/icons/edit.svg" alt="filter" (click)="editProduct(product)">
+                </td> -->
               </tr>
             </tbody>
           </table>

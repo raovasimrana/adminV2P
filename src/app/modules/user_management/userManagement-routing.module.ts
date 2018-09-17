@@ -26,6 +26,16 @@ const routes: Routes = [
         path: `users`,
         // canActivate: [AdminGuard],
         component: AdminComponent
+      },
+      {
+        path: `order`,
+        // canActivate: [AdminGuard],
+        component: AdminComponent
+      },
+      {
+        path: `appointment`,
+        // canActivate: [AdminGuard],
+        component: AdminComponent
       }
     ]
   },
