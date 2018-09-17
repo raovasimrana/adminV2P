@@ -39,12 +39,13 @@ export class AddUserDialogAdminComponent implements OnInit {
         phone: ['', Validators.required],
         userType:['', Validators.required],
         experience:['',Validators.required],
+        address:['', Validators.required]
       }),
       product: this.fb.group({
         productName: ['', Validators.required],
         description: ['', Validators.required],
         price: ['', Validators.required],
-        content:['', Validators.required],
+        content:['', Validators.required]
       }),
     });
   }
@@ -57,19 +58,10 @@ export class AddUserDialogAdminComponent implements OnInit {
     if(this.data.data){
       switch(this.data.url){
         case 'users' :{
-          this.form['controls'].users['controls'].name.setValue(this.data.data.name);
-            this.form['controls'].users['controls'].email.setValue(this.data.email);
-              this.form['controls'].users['controls'].phone.setValue(this.data.phone);
-                this.form['controls'].users['controls'].userType.setValue(this.data.userType);
-                this.form['controls'].users['controls'].experience.setValue(this.data.experience);
-              
-                
+          this.form['controls'].users.setValue(this.data.data);       
         }
         case 'product' :{
-          this.form['controls'].product['controls'].productName.setValue(this.data.data.productName);
-            this.form['controls'].product['controls'].description.setValue(this.data.data.description);
-              this.form['controls'].product['controls'].price.setValue(this.data.data.price);
-                this.form['controls'].product['controls'].content.setValue(this.data.data.content);
+         this.form['controls'].product.setValue(this.data.data);
         }
       }
     }
@@ -91,8 +83,8 @@ public onFileChange(event){
       this.formData.append('email',this.form['controls'].users['controls'].email.value);
       this.formData.append('phone',this.form['controls'].users['controls'].phone.value);
       this.formData.append('userType',this.form['controls'].users['controls'].userType.value);
-      
-      this.formData.append('experience',JSON.stringify([this.form['controls'].users['controls'].experience.value]));
+      this.formData.append('address',this.form['controls'].users['controls'].address.value);
+      this.formData.append('experience', JSON.stringify([this.form['controls'].users['controls'].experience.value]));
       console.log("value", this.form['controls'].users['controls'].experience.value);
       
       this.formData.append('image', this.imageData[0]);
@@ -103,8 +95,15 @@ public onFileChange(event){
         break;
       }
       case 'product': {
-        if(this.form['controls'].product.valid && this.imageData.length){
+        if(this.form['controls'].product.valid && (this.data.data || this.imageData.length)){
           console.log(this.form['controls'].product.value , this.imageData)
+          this.formData.append('productName',this.form['controls'].product['controls'].productName.value);
+          this.formData.append('price',this.form['controls'].product['controls'].price.value);
+          this.formData.append('description',this.form['controls'].product['controls'].description.value);
+          this.formData.append('contents',this.form['controls'].product['controls'].content.value);
+          
+          this.formData.append('image', this.imageData[0]);
+          this.dialogRef.close(this.formData);
         } else {
           console.log('invalid form');
         }
