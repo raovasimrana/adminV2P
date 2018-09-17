@@ -11,7 +11,7 @@ import { LoaderService } from '../../../../commons/services/loader.service';
 import { ToasterService } from 'angular2-toaster';
 import { LocalStorage } from '../../../../commons/services/localStorage.service';
 import * as _ from 'lodash';
-import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
+import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'tm-admin',
   templateUrl: './admin.component.html',
@@ -26,7 +26,7 @@ export class AdminComponent implements OnInit {
   regulatoryBodyData: any;
   sponsorData: any;
   currentTabIndex = 0;
-  searchFilter:string;
+  searchFilter: string;
   public constants = Constants;
   public adminFilter: any;
   public sponsorFilter: any;
@@ -40,7 +40,7 @@ export class AdminComponent implements OnInit {
   public croList: any = [];
   public piList: any = [];
   public croOrganisationList: any = [];
-  public filteredData: any =[];
+  public filteredData: any = [];
 
   @ViewChild('t') tab: MatTabGroup;
   public arrayOne(n: number): any[] {
@@ -51,8 +51,8 @@ export class AdminComponent implements OnInit {
     public router: Router,
     public adminService: AdminService,
     public loaderService: LoaderService,
-  public toasterService: ToasterService,
-  config: NgbTooltipConfig) {
+    public toasterService: ToasterService,
+    config: NgbTooltipConfig) {
     config.placement = 'right';
     config.triggers = 'click';
   }
@@ -61,9 +61,6 @@ export class AdminComponent implements OnInit {
 
     const thisPage = <HTMLElement>document.querySelector('#page');
     thisPage.style.background = '#eff3f6';
-
-
-
     this.url = this.router.url;
     const index = this.url.lastIndexOf('/');
     this.url = this.url.slice(index + 1, this.url.length);
@@ -85,7 +82,7 @@ export class AdminComponent implements OnInit {
           console.log('success', data);
           this.loaderService.display(false);
           this.productList = data.data;
-          this.filteredData = Object.assign([],this.productList);
+          this.filteredData = Object.assign([], this.productList);
 
         },
           (err) => {
@@ -99,7 +96,7 @@ export class AdminComponent implements OnInit {
           console.log('success', data);
           this.loaderService.display(false);
           this.userList = data;
-          this.filteredData = Object.assign([],this.userList);
+          this.filteredData = Object.assign([], this.userList);
 
         },
           (err) => {
@@ -146,10 +143,11 @@ export class AdminComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(AddUserDialogAdminComponent, {
       width: '700px',
-      data: { url: this.url}
+      data: { url: this.url }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        this.loaderService.display(true);
         this.adminService.saveUsers(result).subscribe((success) => {
           this.loaderService.display(false);
           this.toasterService.pop('success', 'User Added Successfully')
@@ -166,14 +164,24 @@ export class AdminComponent implements OnInit {
 
   }
 
-  editUser(data){
+  editUser(data) {
+    console.log("data", data);
+    const userData = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      experience: data.experience,
+      userType: data.userType,
+      address: data.address
+    }
     const dialogRef = this.dialog.open(AddUserDialogAdminComponent, {
       width: '700px',
-      data: { url: this.url, data:data}
+      data: { url: this.url, data: userData }
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       if (result) {
+        this.loaderService.display(true);
         this.adminService.editUser(data.phone, result).subscribe((success) => {
           this.loaderService.display(false);
           this.toasterService.pop('success', 'User Added Successfully')
@@ -188,17 +196,60 @@ export class AdminComponent implements OnInit {
       }
     });
   }
+  editProduct(data) {
+    const userData = {
+      productName: data.productName,
+      price: data.price,
+      description: data.description,
+      content: data.contents
+    }
+    const dialogRef = this.dialog.open(AddUserDialogAdminComponent, {
+      width: '700px',
+      data: { url: this.url, data: userData }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if (result) {
+        this.loaderService.display(true);
+        this.adminService.editProduct(data.phone, result).subscribe((success) => {
+          this.loaderService.display(false);
+          this.toasterService.pop('success', 'User Added Successfully')
+          console.log(success);
+          this.getUserList(this.url);;
+        }),
+          (error) => {
+            console.log(error);
+            this.loaderService.display(false);
 
-    deleteUser(userId) {
+          }
+      }
+    });
+  }
+
+  deleteUserOrProduct(userId) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: { type: 'delete', user: this.url }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
-    this.loaderService.display(true);
-    this.adminService.deleteUser(userId).subscribe((success) => {
+        this.loaderService.display(true);
+        this.adminService.deleteUser(userId).subscribe((success) => {
+          this.loaderService.display(false);
+          this.toasterService.pop('success', 'User Deleted Successfully')
+          console.log(success);
+          this.getUserList(this.url);
+        },
+          (error) => {
+            console.log(error);
+            this.loaderService.display(false);
+          })
+      }
+    });
+  }
+  changeUserStatus(data) {
+    this.adminService.approveUser(data.phone, data).subscribe((success) => {
       this.loaderService.display(false);
-      this.toasterService.pop('success', 'User Deleted Successfully')
+      this.toasterService.pop('success', 'User Approved Successfully')
       console.log(success);
       this.getUserList(this.url);
     },
@@ -206,8 +257,6 @@ export class AdminComponent implements OnInit {
         console.log(error);
         this.loaderService.display(false);
       })
-        }
-  });
   }
 
   searchData() {

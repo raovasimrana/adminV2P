@@ -37,6 +37,12 @@ export class AdminService {
       const options = new RequestOptions({ headers: headers });
       return this.http.put(`${AppConfig.baseUrl}/api/${phone}/users?email=${userInputObj.email}&phone=${userInputObj.phone}`, userInputObj).map(response => response.json());
     }
+    editProduct(phone, userInputObj) {
+      const headers = new Headers();
+      headers.append('mimeType', 'multipart/form-data');
+      const options = new RequestOptions({ headers: headers });
+      return this.http.put(`${AppConfig.baseUrl}/api/${phone}/product`, userInputObj).map(response => response.json());
+    }
     saveUsers(objData) {
       const headers = new Headers();
       headers.append('mimeType', 'multipart/form-data');
@@ -45,5 +51,10 @@ export class AdminService {
     }
     deleteUser(userId) {
         return this._http.delete(`${AppConfig.baseUrl}/api/${userId}/users`).map(response => response.json());
+  
+    }
+
+    approveUser(phone, userInputObj) {
+      return this.http.put(`${AppConfig.baseUrl}/api/${phone}/users?isValidated=true`, userInputObj).map(response => response.json());
     }
 }
