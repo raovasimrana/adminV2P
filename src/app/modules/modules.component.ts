@@ -105,6 +105,12 @@ if (this.userRole){
       case 'users': {
         return `users`;
       }
+      case 'order': {
+        return `order`;
+      }
+      case 'appointment': {
+        return `appointment`;
+      }
   }
 }
   ngDoCheck(): void {

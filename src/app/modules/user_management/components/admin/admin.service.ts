@@ -25,6 +25,12 @@ export class AdminService {
       return this._http.get(`${AppConfig.baseUrl}/api/users`).map(response => response.json());
 
     }
+    getOrderList(){
+      return this._http.get(`${AppConfig.baseUrl}/api/products/order`).map(response => response.json());
+    }
+    getAppointmentList(){
+      return this._http.get(`${AppConfig.baseUrl}/api/users/appointments`).map(response => response.json());
+    }
     editUser(phone, userInputObj) {
       const headers = new Headers();
       headers.append('mimeType', 'multipart/form-data');

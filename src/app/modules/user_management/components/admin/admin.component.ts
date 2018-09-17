@@ -70,6 +70,8 @@ export class AdminComponent implements OnInit {
     switch (this.url) {
       case 'product': this.getUserList('product'); break;
       case 'users': this.getUserList('users'); break;
+      case 'order': this.getUserList('order'); break;
+      case 'appointment': this.getUserList('appointment'); break;
     }
     // this.getUserList(this.userType);
 
@@ -94,6 +96,34 @@ export class AdminComponent implements OnInit {
       }
       case 'users': {
         this.adminService.getUsersList().subscribe((data) => {
+          console.log('success', data);
+          this.loaderService.display(false);
+          this.userList = data;
+          this.filteredData = Object.assign([],this.userList);
+
+        },
+          (err) => {
+            console.log('error', err);
+            this.loaderService.display(false);
+          });
+        break;
+      }
+      case 'order': {
+        this.adminService.getOrderList().subscribe((data) => {
+          console.log('success', data);
+          this.loaderService.display(false);
+          this.userList = data;
+          this.filteredData = Object.assign([],this.userList);
+
+        },
+          (err) => {
+            console.log('error', err);
+            this.loaderService.display(false);
+          });
+        break;
+      }
+      case 'appointment': {
+        this.adminService.getAppointmentList().subscribe((data) => {
           console.log('success', data);
           this.loaderService.display(false);
           this.userList = data;
