@@ -29,7 +29,9 @@
   .siteCoordinatorStyle select{
     width: 290px !important;
   }
-  
-  /* .widthFull{
-    width: 100% !important;
-  } */
+ .view-file{
+  border: solid 1px lightgray;
+ }
+ .image-padding{
+  padding-right: 7px;
+ }

@@ -50,7 +50,7 @@
                   <Button *ngIf="!user.isValidated" class="btn-primary checkButtons btnAprove icons" (click)="changeUserStatus(user)">Approve</Button>
                 </td>
                 <td class="table-content">
-                  <img (click)="viewDocument();" class="pdf" src="./assets/img/icons/file.svg" alt="file">
+                  <img (click)="viewDocument(user);" class="pdf" src="./assets/img/icons/file.svg" alt="file">
                 </td>
                 <td class="table-content">
                   <img class="filterIcon " src="./assets/img/icons/edit.svg" alt="filter" (click)="editUser(user)">

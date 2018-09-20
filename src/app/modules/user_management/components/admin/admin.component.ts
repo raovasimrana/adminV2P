@@ -83,7 +83,7 @@ export class AdminComponent implements OnInit {
         this.adminService.getProdctList().subscribe((data) => {
           console.log('success', data);
           this.loaderService.display(false);
-          this.productList = data.data;
+          this.userList = data.data;
           this.filteredData = Object.assign([], this.productList);
 
         },
@@ -166,10 +166,10 @@ export class AdminComponent implements OnInit {
 
   }
 
-  viewDocument(){
+  viewDocument(user){
     const dialogRef = this.dialog.open(ViewDocumentComponent, {
       width: '700px',
-      data: { url: this.url }
+      data: { url: this.url, data:user }
     });
     dialogRef.afterClosed().subscribe(result => {
       
