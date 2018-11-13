@@ -49,6 +49,12 @@ export class AdminService {
       const options = new RequestOptions({ headers: headers });
         return this.http.post(`${AppConfig.baseUrl}/api/users/register`, objData, options).map(response => response.json());
     }
+    saveProducts(objData) {
+      const headers = new Headers();
+      headers.append('mimeType', 'multipart/form-data');
+      const options = new RequestOptions({ headers: headers });
+        return this.http.post(`${AppConfig.baseUrl}/api/products`, objData, options).map(response => response.json());
+    }
     deleteUser(userId) {
         return this._http.delete(`${AppConfig.baseUrl}/api/${userId}/users`).map(response => response.json());
   

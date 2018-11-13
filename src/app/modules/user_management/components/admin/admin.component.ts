@@ -150,6 +150,7 @@ export class AdminComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.loaderService.display(true);
+        if(this.url !== 'product'){
         this.adminService.saveUsers(result).subscribe((success) => {
           this.loaderService.display(false);
           this.toasterService.pop('success', 'User Added Successfully')
@@ -161,6 +162,19 @@ export class AdminComponent implements OnInit {
             this.loaderService.display(false);
 
           }
+        }else{
+          this.adminService.saveProducts(result).subscribe((success) => {
+            this.loaderService.display(false);
+            this.toasterService.pop('success', 'Product Added Successfully')
+            console.log(success);
+            this.getUserList(this.url);;
+          }),
+            (error) => {
+              console.log(error);
+              this.loaderService.display(false);
+  
+            }
+        }
       }
     });
 
