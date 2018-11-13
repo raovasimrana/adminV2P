@@ -13,6 +13,7 @@ import { LocalStorage } from '../../../../commons/services/localStorage.service'
 import * as _ from 'lodash';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ViewDocumentComponent } from '../../../../commons/dialogs/view-document/view-document.component';
+import { PagerService } from '../../../../commons/services/pager.service';
 
 @Component({
   selector: 'tm-admin',
@@ -43,7 +44,8 @@ export class AdminComponent implements OnInit {
   public piList: any = [];
   public croOrganisationList: any = [];
   public filteredData: any = [];
-
+  public pager: any = {};
+public paginationData: any =[];
   @ViewChild('t') tab: MatTabGroup;
   public arrayOne(n: number): any[] {
     n = 9 - n;
@@ -53,7 +55,8 @@ export class AdminComponent implements OnInit {
     public router: Router,
     public adminService: AdminService,
     public loaderService: LoaderService,
-    public toasterService: ToasterService,
+    public toasterService: ToasterService,  
+      private pagerService: PagerService,
     config: NgbTooltipConfig) {
     config.placement = 'right';
     config.triggers = 'click';
@@ -84,8 +87,9 @@ export class AdminComponent implements OnInit {
           console.log('success', data);
           this.loaderService.display(false);
           this.userList = data.data;
-          this.filteredData = Object.assign([], this.productList);
-
+          this.filteredData = Object.assign([], this.userList);
+          this.paginationData = this.filteredData;
+          this.setPage(1);
         },
           (err) => {
             console.log('error', err);
@@ -99,7 +103,8 @@ export class AdminComponent implements OnInit {
           this.loaderService.display(false);
           this.userList = data;
           this.filteredData = Object.assign([], this.userList);
-
+          this.paginationData = this.filteredData;
+          this.setPage(1);
         },
           (err) => {
             console.log('error', err);
@@ -113,7 +118,8 @@ export class AdminComponent implements OnInit {
           this.loaderService.display(false);
           this.userList = data.data;
           this.filteredData = Object.assign([],this.userList);
-
+          this.paginationData = this.filteredData;
+          this.setPage(1);
         },
           (err) => {
             console.log('error', err);
@@ -127,7 +133,8 @@ export class AdminComponent implements OnInit {
           this.loaderService.display(false);
           this.userList = data;
           this.filteredData = Object.assign([],this.userList);
-
+          this.paginationData = this.filteredData;
+          this.setPage(1);
         },
           (err) => {
             console.log('error', err);
@@ -136,7 +143,6 @@ export class AdminComponent implements OnInit {
         break;
       }
     }
-
   }
   changeOrder(data): void {
     this.sortType = data;
@@ -284,22 +290,70 @@ export class AdminComponent implements OnInit {
       })
   }
 
+  setPage(page: number) {
+    this.pager = this.pagerService.getPager(this.paginationData.length, page);
+    if (page < 1 || page > this.pager.totalPages) {
+      this.userList = [];
+      return;
+    }
+    this.userList = this.paginationData.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    // this.userList = true;
+    // // console.log(this.subjectData);
+
+  }
+
   searchData() {
     const query = this.searchFilter;
     if (query) {
-      this.userList = _.filter(this.filteredData, row => {
-        return (row['orgName'] ? row['orgName'].search(new RegExp(query, 'i')) !== -1 : 0) ||
-          (row['orgId'] ? row['orgId'].search(new RegExp(query, 'i')) !== -1 : 0) ||
-          (row['userId'] ? row['userId'].search(new RegExp(query, 'i')) !== -1 : 0) ||
-          (row['nickName'] ? (row['nickName'].search(new RegExp(query, 'i')) !== -1) : 0) ||
-          (row['emailId'] ? row['emailId'].search(new RegExp(query, 'i')) !== -1 : 0) ||
-          (row['complianceType'] ? row['complianceType'].search(new RegExp(query, 'i')) !== -1 : 0) ||
-          (row['irbName'] ? row['irbName'].search(new RegExp(query, 'i')) !== -1 : 0) ||
-          (row['irbId'] ? row['irbId'].search(new RegExp(query, 'i')) !== -1 : 0);
-      });
+      switch(this.url){
+        case 'users':{
+          this.paginationData = _.filter(this.filteredData, row => {
+            return (row['name'] ? row['name'].search(new RegExp(query, 'i')) !== -1 : 0) ||
+              (row['phone'] ? (row['phone'].toString()).search(new RegExp(query, 'i')) !== -1 : 0) ||
+              (row['email'] ? row['email'].search(new RegExp(query, 'i')) !== -1 : 0) ||
+              (row['userType'] ? (row['userType'].search(new RegExp(query, 'i')) !== -1) : 0) ||
+              (row['emailId'] ? row['emailId'].search(new RegExp(query, 'i')) !== -1 : 0) ||
+              (row['complianceType'] ? row['complianceType'].search(new RegExp(query, 'i')) !== -1 : 0) ||
+              (row['irbName'] ? row['irbName'].search(new RegExp(query, 'i')) !== -1 : 0) ||
+              (row['irbId'] ? row['irbId'].search(new RegExp(query, 'i')) !== -1 : 0);
+          });
+          break;
+        }
+        case 'product':{
+          this.paginationData = _.filter(this.filteredData, row => {
+            return (row['productName'] ? row['productName'].search(new RegExp(query, 'i')) !== -1 : 0) ||
+              (row['price'] ? (row['price'].toString()).search(new RegExp(query, 'i')) !== -1 : 0) ||
+              (row['description'] ? row['description'].search(new RegExp(query, 'i')) !== -1 : 0);
+          });
+          break;
+        }
+        case 'order':{
+          this.paginationData = _.filter(this.filteredData, row => {
+            return (row['userName'] ? row['userName'].search(new RegExp(query, 'i')) !== -1 : 0) ||
+              (row['userPhone'] ? (row['userPhone'].toString()).search(new RegExp(query, 'i')) !== -1 : 0) ||
+              (row['totalPrice'] ? row['totalPrice'].search(new RegExp(query, 'i')) !== -1 : 0) ||
+              (row['quantity'] ? (row['quantity'].search(new RegExp(query, 'i')) !== -1) : 0) ||
+              (row['paymentMethod'] ? row['paymentMethod'].search(new RegExp(query, 'i')) !== -1 : 0);
+          });
+          break;
+        }
+        case 'appointment':{
+          this.paginationData = _.filter(this.filteredData, row => {
+            return (row['userName'] ? row['userName'].search(new RegExp(query, 'i')) !== -1 : 0) ||
+              (row['userPhone'] ? (row['userPhone'].toString()).search(new RegExp(query, 'i')) !== -1 : 0) ||
+              (row['availedService'] ? row['availedService'].search(new RegExp(query, 'i')) !== -1 : 0) ||
+              (row['providerName'] ? (row['providerName'].search(new RegExp(query, 'i')) !== -1) : 0) ||
+              (row['providerPhone'] ? row['providerPhone'].search(new RegExp(query, 'i')) !== -1 : 0) ||
+              (row['status'] ? row['status'].search(new RegExp(query, 'i')) !== -1 : 0);
+          });
+          break;
+        }
+      }
+ this.setPage(1);
       return;
     } else {
-      this.userList = this.filteredData;
+      this.paginationData = this.filteredData;
+      this.setPage(1);
       return;
     }
   }

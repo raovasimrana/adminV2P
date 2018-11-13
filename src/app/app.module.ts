@@ -22,6 +22,7 @@ import {ToasterModule, ToasterService, ToasterConfig} from 'angular2-toaster';
 import { LoaderService } from './commons/services/loader.service';
 import { ConfirmDialogComponent } from './commons/dialogs/confirm-dialog/confirm-dialog.component';
 import { ViewDocumentComponent } from './commons/dialogs/view-document/view-document.component';
+import { PagerService } from './commons/services/pager.service';
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { ViewDocumentComponent } from './commons/dialogs/view-document/view-docu
     FormsModule,
     ToasterModule.forRoot(),
   ],
-  providers: [{ provide: LocalStorage, useValue: 'test' }, AuthGuard, AdminGuard, ToasterService, LoaderService, CustomValidationService],
+  providers: [{ provide: LocalStorage, useValue: 'test' }, AuthGuard, AdminGuard, ToasterService, LoaderService, CustomValidationService, PagerService],
   entryComponents: [AddUserDialogAdminComponent, ConfirmDialogComponent, ViewDocumentComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
