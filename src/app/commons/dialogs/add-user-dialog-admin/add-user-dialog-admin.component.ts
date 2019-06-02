@@ -52,13 +52,16 @@ export class AddUserDialogAdminComponent implements OnInit {
 
   ngOnInit() {
     console.log('data', this.data);
+    console.log("imageData", this.imageData);
+    
     //  ---------------------------------------------------Setting the role ----------------------------------------------------------
     this.type = this.data.type;
     this.submitted = false;
     if(this.data.data){
       switch(this.data.url){
         case 'users' :{
-          this.form['controls'].users.setValue(this.data.data);       
+          this.form['controls'].users.setValue(this.data.data);  
+          break;     
         }
         case 'product' :{
          this.form['controls'].product.setValue(this.data.data);

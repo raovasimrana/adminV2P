@@ -188,3 +188,6 @@
   border-right-color: #01c0c8;
   top: -5px;
 }
+.selected-file{
+  color:red;
+}

@@ -35,29 +35,29 @@
                       </div>
                     </div>
                     <div class="col-md" >
+                      <div class="form-group row">
+                        <label for="experience">Experience</label>
+                      </div>
+                      <div class="row">
+                        <!-- <input type="number"  class="form-control " formControlName="position" placeholder="Enter Contact"/> -->
+                        <select class="form-control" formControlName="experience" >
+                          <option  value="" [selected]="true" [hidden]="true">Select Experience</option>
+                          <option value="Senior Consultant">Senior Consultant</option>
+                          <option value="Junior Consultant">Junior Consultant</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- <div class="col-md" >
                         <div class="form-group row">
                           <label for="type">Type</label>
                         </div>
                         <div class="row">
                           <input type="text"  class="form-control " formControlName="userType" placeholder="Enter Type"/>
                         </div>
-                      </div>
+                      </div> -->
               </div>
               <div class="row">
-                <div class="col-md" >
-                    <div class="form-group row">
-                      <label for="experience">Experience</label>
-                    </div>
-                    <div class="row">
-                      <!-- <input type="number"  class="form-control " formControlName="position" placeholder="Enter Contact"/> -->
-                      <select class="form-control" formControlName="experience" >
-                        <option  value="" [selected]="true" [hidden]="true">Select Experience</option>
-                        <option value="Senior Consultant">Senior Consultant</option>
-                        <option value="Junior Consultant">Junior Consultant</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md" >
+                  <div class="col-md-6" >
                       <div class="form-group row">
                         <label for="address">Address</label>
                       </div>
@@ -76,6 +76,10 @@
             </div>
           </ng-container>
         </div>
+        <div *ngIf="imageData.length" class="d-flex flex-row row ">Selceted File :
+            <span  class="selected-file"> {{ this.imageData[0].name}}
+              </span>
+            </div>
       </div>
 
       <div class="" formGroupName="product" *ngIf="data.url === 'product'">

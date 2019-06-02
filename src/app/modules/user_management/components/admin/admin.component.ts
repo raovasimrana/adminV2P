@@ -63,7 +63,19 @@ public paginationData: any =[];
   }
 
   ngOnInit() {
-
+  //  this.userList = [{
+  //    name:"chetan singh",
+  //    phone:"8956745289",
+  //    email:"test@yopmail.com",
+  //    userType:"User",
+  //    isValidated: true,
+  //    experience: 6,
+  //    address:"123412 sdfvwefwerfwerfer edcwc",
+  //    productName: "ADSFdfas",
+  //    description: "hjasdjg",
+  //    price : "65",
+  //    content: "asdcasdc"
+  //  }]
     const thisPage = <HTMLElement>document.querySelector('#page');
     thisPage.style.background = '#eff3f6';
     this.url = this.router.url;
