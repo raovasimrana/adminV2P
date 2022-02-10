@@ -38,7 +38,7 @@
         "jwt-decode": "^2.2.0",
         "ng2-dragula": "^2.0.2",
         "ngx-ckeditor": "^0.3.2",
-        "node-sass": "^4.9.3",
+        "node-sass": "^7.0.0",
         "npm": "^5.6.0",
         "rxjs": "^5.5.6",
         "webpack-bundle-analyzer": "^2.13.1",
